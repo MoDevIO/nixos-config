@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, hostname, ... }:
 
 {
   home.packages = [
@@ -8,6 +8,7 @@
     pkgs.vtsls
     pkgs.lua-language-server
     pkgs.pyright
+    pkgs.nixd
 
     # Formatters
     pkgs.prettier
@@ -66,13 +67,29 @@
         config = {
           cmd = [
             "nixd"
-            "--stdio"
+            "--log=debug"
           ];
           filetypes = [
             "nix"
           ];
 
-          settings = { };
+          settings = {
+            nixd = {
+              nixpkgs.expr = "import (builtins.getFlake \"git+file:///home/mo/Documents/Coding/nix-config\").inputs.nixpkgs { }";
+
+              options = {
+                nixos.expr =
+                  "(builtins.getFlake \"git+file:///home/mo/Documents/Coding/nix-config\").nixosConfigurations."
+                  + hostname
+                  + ".options";
+
+                home_manager.expr =
+                  "(builtins.getFlake \"git+file:///home/mo/Documents/Coding/nix-config\").nixosConfigurations."
+                  + hostname
+                  + ".options.home-manager.users.type.getSubOptions []";
+              };
+            };
+          };
         };
       };
 
