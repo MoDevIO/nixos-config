@@ -1,10 +1,11 @@
 {
-    imports = [
-        ./nix.nix
-        ./boot.nix
-        ./users.nix
-        ./network.nix
-        ./locals.nix
-        ./font.nix
-    ];
+  imports = [
+    ./nix.nix
+    ./boot.nix
+    ./users.nix
+    ./sops-nix.nix
+    ./network.nix
+    ./locals.nix
+    ./font.nix
+  ];
 }

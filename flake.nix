@@ -1,77 +1,99 @@
 {
-    description = "NixOS Configuration";
+  description = "NixOS Configuration";
 
-    inputs = {
-        nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+  inputs = {
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
-        nur = {
-            url = "github:nix-community/NUR";
-            inputs.nixpkgs.follows = "nixpkgs";
-        };
-
-        home-manager = {
-            url = "github:nix-community/home-manager";
-            inputs.nixpkgs.follows = "nixpkgs";
-        };
-
-        qylock.url = "github:Darkkal44/qylock";
-        nixcord.url = "github:4evy/nixcord";
-
+    nur = {
+      url = "github:nix-community/NUR";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    outputs = { nixpkgs, home-manager, qylock, nur, nixcord, ... }: {
-        nixosConfigurations = {
-            x1 = nixpkgs.lib.nixosSystem {
-                system = "x86_64-linux";
+    home-manager = {
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
-                specialArgs = {
-                    hostname = "x1";
-                    keyboardLayout = "de";
+    sops-nix.url = "github:Mic92/sops-nix";
+    sops-nix.inputs.nixpkgs.follows = "nixpkgs";
 
-                    inherit nixcord;
-                };
+    nixvim.url = "github:nix-community/nixvim";
+    nixvim.inputs.nixpkgs.follows = "nixpkgs";
 
-                modules = [
-                    ./hosts/x1
+    qylock.url = "github:Darkkal44/qylock";
+    nixcord.url = "github:4evy/nixcord";
 
-                    home-manager.nixosModules.home-manager
-                    {
-                    home-manager.extraSpecialArgs = {
-                        firefox-addons = nur.legacyPackages.x86_64-linux.repos.rycee.firefox-addons;
+  };
 
-                        keyboardLayout = "de";
-                    };
-                    }
+  outputs =
+    {
+      nixpkgs,
+      home-manager,
+      qylock,
+      nur,
+      nixcord,
+      nixvim,
+      sops-nix,
+      ...
+    }:
+    {
 
-                    qylock.nixosModules.default
-                ];
+      nixosConfigurations = builtins.listToAttrs (
+        map
+          (systemName: {
+            name = systemName;
+            value = nixpkgs.lib.nixosSystem {
+              system = "x86_64-linux";
+
+              specialArgs = {
+                hostname = systemName;
+                keyboardLayout =
+                  if systemName == "x1" then
+                    "de"
+                  else if systemName == "t14" then
+                    "gb"
+                  else
+                    "";
+
+                inherit nixcord;
+              };
+
+              modules = [
+                ./hosts/${systemName}
+
+                home-manager.nixosModules.home-manager
+                {
+                  home-manager.sharedModules = [
+                    sops-nix.homeModules.sops
+                    nixvim.homeModules.nixvim
+                  ];
+
+                  home-manager.extraSpecialArgs = {
+                    hostname = systemName;
+
+                    firefox-addons = nur.legacyPackages.x86_64-linux.repos.rycee.firefox-addons;
+
+                    keyboardLayout =
+                      if systemName == "x1" then
+                        "de"
+                      else if systemName == "t14" then
+                        "gb"
+                      else
+                        "";
+                  };
+                }
+
+                qylock.nixosModules.default
+                sops-nix.nixosModules.sops
+                nixvim.nixosModules.nixvim
+              ];
             };
-            
-            t14 = nixpkgs.lib.nixosSystem {
-                system = "x86_64-linux";
+          })
+          [
+            "x1"
+            "t14"
+          ]
+      );
 
-                specialArgs = {
-                    hostname = "t14";
-                    keyboardLayout = "gb";
-
-                    inherit nixcord;
-                };
-
-                modules = [
-                    ./hosts/t14
-
-                    home-manager.nixosModules.home-manager
-                    {
-                    home-manager.extraSpecialArgs = {
-                        firefox-addons = nur.legacyPackages.x86_64-linux.repos.rycee.firefox-addons;
-
-                        keyboardLayout = "gb";
-                    };
-                    }
-
-                    qylock.nixosModules.default
-                ];
-            };
-        };
     };
 }
