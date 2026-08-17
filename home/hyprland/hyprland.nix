@@ -1,4 +1,4 @@
-{ lib, keyboardLayout, ... }:
+{ keyboardLayout, ... }:
 
 {
   wayland.windowManager.hyprland = {

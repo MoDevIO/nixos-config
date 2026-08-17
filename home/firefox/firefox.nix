@@ -1,4 +1,4 @@
-{ pkgs, firefox-addons, ... }:
+{ firefox-addons, ... }:
 
 let
   vimiumCss = builtins.readFile ./vimium.css;
