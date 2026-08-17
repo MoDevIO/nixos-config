@@ -4,6 +4,7 @@
     ./kitty/kitty.nix
     ./nvim/nvim.nix
     ./firefox/firefox.nix
+    ./cliamp/cliamp.nix
     ./neomutt/neomutt.nix
     ./vscode/vscode.nix
     ./git/git.nix
