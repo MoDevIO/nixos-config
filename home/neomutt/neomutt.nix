@@ -1,10 +1,10 @@
-{config, pkgs, ... }:
+{ config, pkgs, ... }:
 
 {
   sops.defaultSopsFile = ../../secrets/secrets.yaml;
   sops.age.keyFile = "/home/mo/.config/sops/age/keys.txt";
 
-  sops.secrets.gmail_auth_key = {};
+  sops.secrets.gmail_auth_key = { };
 
   programs.neomutt = {
     enable = true;

@@ -1,4 +1,4 @@
 {
-    programs.vscode.enable = true;
-    programs.vscode.mutableExtensionsDir = true;
+  programs.vscode.enable = true;
+  programs.vscode.mutableExtensionsDir = true;
 }

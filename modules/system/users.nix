@@ -1,21 +1,24 @@
 { nixcord, ... }:
 
 {
-    users.users."mo" = {
-        isNormalUser = true;
-        description = "Mo";
-        extraGroups = [ "networkmanager" "wheel" ];
-    };
+  users.users."mo" = {
+    isNormalUser = true;
+    description = "Mo";
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+    ];
+  };
 
-    home-manager = {
+  home-manager = {
 
-        useGlobalPkgs = true;
-        useUserPackages = true;
+    useGlobalPkgs = true;
+    useUserPackages = true;
 
-        users.mo.imports = [
-            ../../home
-            nixcord.homeModules.nixcord
-        ];
+    users.mo.imports = [
+      ../../home
+      nixcord.homeModules.nixcord
+    ];
 
-    };
+  };
 }
