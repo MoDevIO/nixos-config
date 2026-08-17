@@ -6,6 +6,7 @@
     ./firefox/firefox.nix
     ./neomutt/neomutt.nix
     ./vscode/vscode.nix
+    ./git/git.nix
     ./system/dark-mode.nix
     ./system/mouse-cursor.nix
     ./nixcord/nixcord.nix
