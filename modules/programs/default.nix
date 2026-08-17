@@ -10,5 +10,6 @@
         ./fractal.nix
         ./appimage.nix
         ./prism-launcher.nix
+        ./devtools.nix
     ];
 }
