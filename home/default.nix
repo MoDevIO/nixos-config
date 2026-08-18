@@ -8,6 +8,7 @@
     ./neomutt/neomutt.nix
     ./vscode/vscode.nix
     ./git/git.nix
+    ./syncthing/syncthing.nix
     ./system/dark-mode.nix
     ./system/mouse-cursor.nix
     ./nixcord/nixcord.nix
