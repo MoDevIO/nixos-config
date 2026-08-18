@@ -11,6 +11,7 @@
     ./system/dark-mode.nix
     ./system/mouse-cursor.nix
     ./nixcord/nixcord.nix
+    ./opencode/opencode.nix
   ];
 
   home.stateVersion = "26.05";
