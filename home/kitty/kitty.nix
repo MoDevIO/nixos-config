@@ -58,6 +58,8 @@
       ns = "nix-shell -p";
       nd = "nix develop";
       nors = "sudo nixos-rebuild switch --flake ~/Documents/Coding/nix-config#" + hostname;
+      # nvim
+      nvimnix = "cd ~/Documents/Coding/nix-config && nvim .";
     };
 
     initContent = ''
