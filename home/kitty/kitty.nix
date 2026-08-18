@@ -60,6 +60,14 @@
       nors = "sudo nixos-rebuild switch --flake ~/Documents/Coding/nix-config#" + hostname;
     };
 
+    initContent = ''
+      nvim() {
+        kitty @ set-spacing padding=0
+        command nvim "$@"
+        kitty @ set-spacing padding=default
+      }
+    '';
+
   };
 
   programs.bash = {
