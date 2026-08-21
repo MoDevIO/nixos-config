@@ -1,3 +1,5 @@
+{ pkgs, ... }:
+
 {
   system.stateVersion = "26.11";
 
@@ -13,4 +15,8 @@
   };
 
   nixpkgs.config.allowUnfree = true;
+
+  environment.systemPackages = [
+    pkgs.brightnessctl
+  ];
 }
