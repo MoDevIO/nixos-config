@@ -1,6 +1,9 @@
-{ nixcord, ... }:
+{ config, nixcord, ... }:
 
 {
+
+  sops.secrets."user_password_mo" = { };
+
   users.users."mo" = {
     isNormalUser = true;
     description = "Mo";
@@ -8,6 +11,7 @@
       "networkmanager"
       "wheel"
     ];
+    hashedPasswordFile = config.sops.secrets."user_password_mo".path;
   };
 
   home-manager = {
