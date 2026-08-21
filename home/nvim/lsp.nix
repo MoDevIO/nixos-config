@@ -9,6 +9,7 @@
     pkgs.lua-language-server
     pkgs.pyright
     pkgs.nixd
+    pkgs.kdePackages.qtdeclarative
 
     # Formatters
     pkgs.prettier
@@ -106,6 +107,19 @@
               };
             };
           };
+        };
+      };
+
+      qmlls = {
+        enable = true;
+        config = {
+          cmd = [
+            "qmlls"
+            "-E"
+            "-I"
+            "${pkgs.quickshell}/lib/qt-6/qml"
+          ];
+          filetypes = [ "qml" ];
         };
       };
 
