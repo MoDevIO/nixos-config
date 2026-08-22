@@ -25,6 +25,8 @@
       require("keybinds")
       require("appearance")
       require("autostart")
+      require("input")
+      require("gkeys")
     '';
   };
 
@@ -36,6 +38,8 @@
   xdg.configFile."hypr/keybinds.lua".source = ./lua/keybinds.lua;
   xdg.configFile."hypr/appearance.lua".source = ./lua/appearance.lua;
   xdg.configFile."hypr/autostart.lua".source = ./lua/autostart.lua;
+  xdg.configFile."hypr/input.lua".source = ./lua/input.lua;
+  xdg.configFile."hypr/gkeys.lua".source = ./lua/gkeys.lua;
 
   programs.quickshell = {
     enable = true;
