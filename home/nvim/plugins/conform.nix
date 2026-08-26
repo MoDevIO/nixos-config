@@ -12,6 +12,7 @@
         typescriptreact = [ "prettier" ];
         lua = [ "lua-format" ];
         nix = [ "nixfmt" ];
+        python = [ "black" ];
       };
 
       format_on_save = {

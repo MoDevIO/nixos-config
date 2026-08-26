@@ -15,6 +15,7 @@
     pkgs.prettier
     pkgs.nixfmt
     pkgs.luaformatter
+    pkgs.black
   ];
 
   programs.nixvim = {
