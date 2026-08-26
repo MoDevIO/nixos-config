@@ -60,9 +60,23 @@
       nors = "sudo nixos-rebuild switch --flake ~/Documents/Coding/nix-config#" + hostname;
       # nvim
       nvimnix = "cd ~/Documents/Coding/nix-config && nvim .";
+
+      # Quick folder navigation
+      cdh = "cd ~";
+      cdd = "cd ~/Documents";
+      cdcd = "cd ~/Documents/Coding";
+      cdn = "cd ~/Documents/Coding/nix-config";
     };
 
     initContent = ''
+
+      ghcl() {
+        local repo="$1"
+        [[ "$repo" != */* ]] && repo="MoDevIO/$repo"
+        git clone "https://github.com/$repo.git"
+      }
+
+      # Kitty padding=0 for specific commands
       nvim() {
         kitty @ set-spacing padding=0
         command nvim "$@"
