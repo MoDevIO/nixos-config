@@ -59,3 +59,8 @@ hl.bind("XF86MonBrightnessDown",
         hl.dsp.exec_cmd("brightnessctl -e4 -n2 set 5%-"),
         {locked = true, repeating = true})
 
+hl.bind("PRINT", hl.dsp.exec_cmd("grim -g $(slurp) | wl-copy"))
+hl.bind("SUPER + PRINT",
+        hl.dsp.exec_cmd("grim -g $(slurp) | tesseract -l eng - | wl-copy)"))
+hl.bind("SUPER + SHIFT + PRINT",
+        hl.dsp.exec_cmd("grim -g $(slurp) | tesseract -l deu - | wl-copy)"))

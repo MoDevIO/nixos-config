@@ -32,6 +32,13 @@
 
   home.packages = with pkgs; [
     awww
+
+    # Screenshot
+    grim
+    slurp
+    tesseract
+
+    wl-clipboard
   ];
 
   xdg.configFile."hypr/workspaces.lua".source = ./lua/workspaces.lua;
