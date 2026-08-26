@@ -17,6 +17,7 @@
     ./system/mouse-cursor.nix
     ./nixcord/nixcord.nix
     ./opencode/opencode.nix
+    ./nautilus/nautilus.nix
   ];
 
   home.stateVersion = "26.05";
