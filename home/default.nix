@@ -8,6 +8,7 @@
     ./kitty/kitty.nix
     ./nvim/nvim.nix
     ./firefox/firefox.nix
+    ./wiremix/wiremix.nix
     ./cliamp/cliamp.nix
     ./neomutt/neomutt.nix
     ./vscode/vscode.nix
