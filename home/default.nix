@@ -5,7 +5,7 @@
 
   imports = [
     ./hyprland/hyprland.nix
-    ./kitty/kitty.nix
+    ./terminal
     ./nvim/nvim.nix
     ./firefox/firefox.nix
     ./wiremix/wiremix.nix
