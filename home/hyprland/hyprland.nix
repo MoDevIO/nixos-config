@@ -1,6 +1,10 @@
 { pkgs, keyboardLayout, ... }:
 
 {
+  imports = [
+    ./background.nix
+  ];
+
   wayland.windowManager.hyprland = {
     enable = true;
 
