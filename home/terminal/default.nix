@@ -5,4 +5,6 @@
     ./bash.nix
     ./btop.nix
   ];
+
+  programs.nh.enable = true;
 }
