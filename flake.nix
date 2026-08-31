@@ -45,6 +45,7 @@
             inherit nixcord;
 
             hostname = machine.hostname;
+            systemName = systemName;
             keyboardLayout = machine.keyboard;
             username = machine.user;
 

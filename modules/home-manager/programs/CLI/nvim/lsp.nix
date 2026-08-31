@@ -77,16 +77,16 @@
 
           settings = {
             nixd = {
-              nixpkgs.expr = "import (builtins.getFlake \"git+file:///home/${username}/Documents/Coding/nix-config\").inputs.nixpkgs { }";
+              nixpkgs.expr = "import (builtins.getFlake \"git+file:///home/${username}/nixos-config\").inputs.nixpkgs { }";
 
               options = {
                 nixos.expr =
-                  "(builtins.getFlake \"git+file:///home/${username}/Documents/Coding/nix-config\").nixosConfigurations."
+                  "(builtins.getFlake \"git+file:///home/${username}/nixos-config\").nixosConfigurations."
                   + hostname
                   + ".options";
 
                 home_manager.expr =
-                  "(builtins.getFlake \"git+file:///home/${username}/Documents/Coding/nix-config\").nixosConfigurations."
+                  "(builtins.getFlake \"git+file:///home/${username}/nixos-config\").nixosConfigurations."
                   + hostname
                   + ".options.home-manager.users.type.getSubOptions []";
               };

@@ -1,4 +1,4 @@
-{ hostname, ... }:
+{ systemName, ... }:
 
 {
   programs.bash = {
@@ -19,11 +19,11 @@
       # Nix
       ns = "nix-shell -p";
       nd = "nix develop";
-      nors = "nh os switch ~/Documents/Coding/nix-config#" + hostname;
+      nors = "nh os switch ~/nixos-config#" + systemName;
 
       # nvim
       ssh = "TERM=xterm-256color ssh";
-      nvimnix = "cd ~/Documents/Coding/nix-config && nvim .";
+      nvimnix = "cd ~/nixos-config && nvim .";
 
       # Other
       ndd = "nautilus . & disown; kitty @ close-window";

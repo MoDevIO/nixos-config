@@ -1,4 +1,4 @@
-{ hostname, ... }:
+{ systemName, ... }:
 
 {
   programs.zsh = {
@@ -25,16 +25,16 @@
       # Nix
       ns = "nix-shell -p";
       nd = "nix develop";
-      nors = "nh os switch ~/Documents/Coding/nix-config#" + hostname;
+      nors = "nh os switch ~/nixos-config#" + systemName;
 
       # nvim
-      nvimnix = "cd ~/Documents/Coding/nix-config && nvim .";
+      nvimnix = "cd ~/nixos-config && nvim .";
 
       # Quick folder navigation
       cdh = "cd ~";
       cdd = "cd ~/Documents";
       cdcd = "cd ~/Documents/Coding";
-      cdn = "cd ~/Documents/Coding/nix-config";
+      cdn = "cd ~/nixos-config";
 
       # Other
       ssh = "TERM=xterm-256color ssh";
