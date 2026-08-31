@@ -1,0 +1,10 @@
+[
+  {
+    "name": "nixser1",
+    "system": "x86_64-linux",
+    "hostname": "nixser1",
+    "ip": "192.168.179.100",
+    "prefixLength": 23,
+    "networkInterface": "eno1"
+  }
+]

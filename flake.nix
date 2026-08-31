@@ -36,49 +36,55 @@
       machines = builtins.fromJSON (builtins.readFile ./machines.json);
     in
     {
+      nixosConfigurations = builtins.listToAttrs (
+        map (
+          machine:
+          let
+            systemName = machine.name;
 
-      nixosConfigurations = builtins.mapAttrs (
-        systemName: machine:
-        let
-          specialArgs = {
-            inherit self;
-            inherit nixcord;
+            specialArgs = {
+              inherit self nixcord systemName;
 
-            hostname = machine.hostname;
-            systemName = systemName;
-            keyboardLayout = machine.keyboard;
-            username = machine.user;
+              hostname = machine.hostname;
+              keyboardLayout = machine.keyboard;
+              username = machine.user;
 
-            ipAddr = machine.ip;
-            prefixLength = machine.prefixLength;
-            networkInterface = machine.networkInterface;
-          };
+              ipAddr = machine.ip;
+              prefixLength = machine.prefixLength;
+              networkInterface = machine.networkInterface;
+            };
 
-          homemanagerSpecialArgs = specialArgs // {
-            firefox-addons = nur.legacyPackages.x86_64-linux.repos.rycee.firefox-addons;
-          };
-        in
-        nixpkgs.lib.nixosSystem {
-          system = machine.system;
-          inherit specialArgs;
+            homemanagerSpecialArgs = specialArgs // {
+              firefox-addons = nur.legacyPackages.${machine.system}.repos.rycee.firefox-addons;
+            };
+          in
+          {
+            name = systemName;
 
-          modules = [
-            ./hosts/${systemName}
+            value = nixpkgs.lib.nixosSystem {
+              system = machine.system;
+              inherit specialArgs;
 
-            qylock.nixosModules.default
-            sops-nix.nixosModules.sops
-            nixvim.nixosModules.nixvim
-            home-manager.nixosModules.home-manager
-            {
-              home-manager.sharedModules = [
-                sops-nix.homeModules.sops
-                nixvim.homeModules.nixvim
+              modules = [
+                ./hosts/${systemName}
+
+                qylock.nixosModules.default
+                sops-nix.nixosModules.sops
+                nixvim.nixosModules.nixvim
+                home-manager.nixosModules.home-manager
+
+                {
+                  home-manager.sharedModules = [
+                    sops-nix.homeModules.sops
+                    nixvim.homeModules.nixvim
+                  ];
+
+                  home-manager.extraSpecialArgs = homemanagerSpecialArgs;
+                }
               ];
-              home-manager.extraSpecialArgs = homemanagerSpecialArgs;
-            }
-          ];
-
-        }
-      ) machines;
+            };
+          }
+        ) machines
+      );
     };
 }
