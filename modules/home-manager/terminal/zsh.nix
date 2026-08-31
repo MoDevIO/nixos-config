@@ -37,6 +37,7 @@
       cdn = "cd ~/Documents/Coding/nix-config";
 
       # Other
+      ssh = "TERM=xterm-256color ssh";
       ndd = "nautilus . & disown; kitty @ close-window";
     };
 

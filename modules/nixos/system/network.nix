@@ -1,34 +1,49 @@
-{ config, hostname, ... }:
+{
+  config,
+  hostname,
+  ipAddr,
+  prefixLength,
+  networkInterface,
+  ...
+}:
 
 {
-  networking.hostName = hostname;
-  networking.firewall.enable = false;
-
   sops.secrets."wifi_secrets" = {
     owner = "root";
   };
 
-  networking.networkmanager = {
-    enable = true;
-    ensureProfiles = {
-      environmentFiles = [
-        config.sops.secrets."wifi_secrets".path
-      ];
+  networking = {
+    hostName = hostname;
+    interfaces.${networkInterface}.ipv4.addresses = [
+      {
+        address = ipAddr;
+        prefixLength = prefixLength;
+      }
+    ];
 
-      profiles = {
-        "superspeed" = {
-          connection = {
-            id = "superspeed";
-            type = "wifi";
-            autoconnect = true;
-          };
-          wifi = {
-            ssid = "superspeed";
-            mode = "infrastructure";
-          };
-          wifi-security = {
-            key-mgmt = "wpa-psk";
-            psk = "$SUPERSPEED_PASSWORD";
+    firewall.enable = false;
+    networkmanager = {
+      enable = true;
+      ensureProfiles = {
+        environmentFiles = [
+          config.sops.secrets."wifi_secrets".path
+        ];
+
+        profiles = {
+          "superspeed" = {
+            connection = {
+              id = "superspeed";
+              type = "wifi";
+              autoconnect = true;
+            };
+            wifi = {
+              ssid = "superspeed";
+              mode = "infrastructure";
+            };
+            wifi-security = {
+              key-mgmt = "wpa-psk";
+              psk = "$SUPERSPEED_PASSWORD";
+            };
           };
         };
       };
@@ -39,5 +54,4 @@
     enable = true;
     powerOnBoot = true;
   };
-
 }

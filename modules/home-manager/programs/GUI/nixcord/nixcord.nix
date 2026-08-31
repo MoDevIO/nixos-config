@@ -1,10 +1,12 @@
+{ username, ... }:
+
 {
   programs.nixcord = {
     enable = true;
     discord.enable = false;
     vesktop.enable = true;
 
-    user = "mo";
+    user = username;
 
     quickCss = builtins.readFile ./quick.css;
     config = {

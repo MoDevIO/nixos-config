@@ -2,21 +2,22 @@
   self,
   config,
   nixcord,
+  username,
   ...
 }:
 
 {
 
-  sops.secrets."user_password_mo" = { };
+  sops.secrets."user_password_${username}" = { };
 
-  users.users."mo" = {
+  users.users.${username} = {
     isNormalUser = true;
-    description = "Mo";
+    description = username;
     extraGroups = [
       "networkmanager"
       "wheel"
     ];
-    hashedPasswordFile = config.sops.secrets."user_password_mo".path;
+    hashedPasswordFile = config.sops.secrets."user_password_${username}".path;
   };
 
   home-manager = {
@@ -25,7 +26,7 @@
     useGlobalPkgs = true;
     useUserPackages = true;
 
-    users.mo.imports = [
+    users.${username}.imports = [
       "${self}/modules/home-manager/default.nix"
       nixcord.homeModules.nixcord
     ];

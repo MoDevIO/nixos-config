@@ -4,15 +4,11 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
-    nur = {
-      url = "github:nix-community/NUR";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    nur.url = "github:nix-community/NUR";
+    nur.inputs.nixpkgs.follows = "nixpkgs";
 
-    home-manager = {
-      url = "github:nix-community/home-manager";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    home-manager.url = "github:nix-community/home-manager";
+    home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
     sops-nix.url = "github:Mic92/sops-nix";
     sops-nix.inputs.nixpkgs.follows = "nixpkgs";
@@ -22,7 +18,6 @@
 
     qylock.url = "github:Darkkal44/qylock";
     nixcord.url = "github:4evy/nixcord";
-
   };
 
   outputs =
@@ -37,66 +32,52 @@
       sops-nix,
       ...
     }:
+    let
+      machines = builtins.fromJSON (builtins.readFile ./machines.json);
+    in
     {
 
-      nixosConfigurations = builtins.listToAttrs (
-        map
-          (systemName: {
-            name = systemName;
-            value = nixpkgs.lib.nixosSystem {
-              system = "x86_64-linux";
+      nixosConfigurations = builtins.mapAttrs (
+        systemName: machine:
+        let
+          specialArgs = {
+            inherit self;
+            inherit nixcord;
 
-              specialArgs = {
-                inherit self;
-                hostname = systemName;
-                keyboardLayout =
-                  if systemName == "x1" then
-                    "de"
-                  else if systemName == "t14" then
-                    "gb"
-                  else
-                    "";
+            hostname = machine.hostname;
+            keyboardLayout = machine.keyboard;
+            username = machine.user;
 
-                inherit nixcord;
-              };
+            ipAddr = machine.ip;
+            prefixLength = machine.prefixLength;
+            networkInterface = machine.networkInterface;
+          };
 
-              modules = [
-                ./hosts/${systemName}
+          homemanagerSpecialArgs = specialArgs // {
+            firefox-addons = nur.legacyPackages.x86_64-linux.repos.rycee.firefox-addons;
+          };
+        in
+        nixpkgs.lib.nixosSystem {
+          system = machine.system;
+          inherit specialArgs;
 
-                home-manager.nixosModules.home-manager
-                {
-                  home-manager.sharedModules = [
-                    sops-nix.homeModules.sops
-                    nixvim.homeModules.nixvim
-                  ];
+          modules = [
+            ./hosts/${systemName}
 
-                  home-manager.extraSpecialArgs = {
-                    inherit self;
-                    hostname = systemName;
-
-                    firefox-addons = nur.legacyPackages.x86_64-linux.repos.rycee.firefox-addons;
-
-                    keyboardLayout =
-                      if systemName == "x1" then
-                        "de"
-                      else if systemName == "t14" then
-                        "gb"
-                      else
-                        "";
-                  };
-                }
-
-                qylock.nixosModules.default
-                sops-nix.nixosModules.sops
-                nixvim.nixosModules.nixvim
+            qylock.nixosModules.default
+            sops-nix.nixosModules.sops
+            nixvim.nixosModules.nixvim
+            home-manager.nixosModules.home-manager
+            {
+              home-manager.sharedModules = [
+                sops-nix.homeModules.sops
+                nixvim.homeModules.nixvim
               ];
-            };
-          })
-          [
-            "x1"
-            "t14"
-          ]
-      );
+              home-manager.extraSpecialArgs = homemanagerSpecialArgs;
+            }
+          ];
 
+        }
+      ) machines;
     };
 }

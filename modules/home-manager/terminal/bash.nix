@@ -22,6 +22,7 @@
       nors = "nh os switch ~/Documents/Coding/nix-config#" + hostname;
 
       # nvim
+      ssh = "TERM=xterm-256color ssh";
       nvimnix = "cd ~/Documents/Coding/nix-config && nvim .";
 
       # Other
