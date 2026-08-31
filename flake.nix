@@ -71,6 +71,7 @@
                   ];
 
                   home-manager.extraSpecialArgs = {
+                    inherit self;
                     hostname = systemName;
 
                     firefox-addons = nur.legacyPackages.x86_64-linux.repos.rycee.firefox-addons;

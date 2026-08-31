@@ -4,11 +4,12 @@
   imports = [
     ./hardware-configuration.nix
 
-    "${self}/modules/system"
-    "${self}/modules/services"
-    "${self}/modules/desktop/gnome.nix"
-    "${self}/modules/programs"
-    "${self}/modules/programs/games.nix"
+    "${self}/modules/nixos/system"
+    "${self}/modules/nixos/services"
+    "${self}/modules/nixos/desktop/hyprland.nix"
+    "${self}/modules/nixos/desktop/gnome.nix"
+    "${self}/modules/nixos/programs"
+    "${self}/modules/nixos/programs/games.nix"
   ];
 
   hardware.graphics.enable = true;

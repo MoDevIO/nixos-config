@@ -1,4 +1,9 @@
-{ config, nixcord, ... }:
+{
+  self,
+  config,
+  nixcord,
+  ...
+}:
 
 {
 
@@ -21,7 +26,7 @@
     useUserPackages = true;
 
     users.mo.imports = [
-      ../../home
+      "${self}/modules/home-manager/default.nix"
       nixcord.homeModules.nixcord
     ];
 
