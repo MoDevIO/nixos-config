@@ -23,6 +23,9 @@
 
       # nvim
       nvimnix = "cd ~/Documents/Coding/nix-config && nvim .";
+
+      # Other
+      ndd = "nautilus . & disown; kitty @ close-window";
     };
   };
 

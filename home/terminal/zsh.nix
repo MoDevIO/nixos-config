@@ -26,6 +26,7 @@
       ns = "nix-shell -p";
       nd = "nix develop";
       nors = "nh os switch ~/Documents/Coding/nix-config#" + hostname;
+
       # nvim
       nvimnix = "cd ~/Documents/Coding/nix-config && nvim .";
 
@@ -34,6 +35,9 @@
       cdd = "cd ~/Documents";
       cdcd = "cd ~/Documents/Coding";
       cdn = "cd ~/Documents/Coding/nix-config";
+
+      # Other
+      ndd = "nautilus . & disown; kitty @ close-window";
     };
 
     initContent = ''
