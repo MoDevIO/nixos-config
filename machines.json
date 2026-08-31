@@ -1,5 +1,6 @@
-{
-  "t14": {
+[
+  {
+    "name": "t14",
     "system": "x86_64-linux",
     "hostname": "T14",
     "keyboard": "gb",
@@ -8,8 +9,8 @@
     "prefixLength": 23,
     "networkInterface": "wlp1s0"
   },
-
-  "x1": {
+  {
+    "name": "x1",
     "system": "x86_64-linux",
     "hostname": "X1",
     "keyboard": "de",
@@ -17,5 +18,15 @@
     "ip": "192.168.179.51",
     "prefixLength": 23,
     "networkInterface": "wlp1s0"
+  },
+  {
+    "name": "pc",
+    "system": "x86_64-linux",
+    "hostname": "MoPC",
+    "keyboard": "de",
+    "user": "mo",
+    "ip": "192.168.179.55",
+    "prefixLength": 23,
+    "networkInterface": "PLACEHOLDER"
   }
-}
+]
