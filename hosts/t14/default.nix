@@ -1,11 +1,14 @@
+{ self, ... }:
+
 {
   imports = [
     ./hardware-configuration.nix
 
-    ../../modules/system
-    ../../modules/services
-    ../../modules/desktop/gnome.nix
-    ../../modules/programs
+    "${self}/modules/system"
+    "${self}/modules/services"
+    "${self}/modules/desktop/gnome.nix"
+    "${self}/modules/programs"
+    "${self}/modules/programs/games.nix"
   ];
 
   hardware.graphics.enable = true;

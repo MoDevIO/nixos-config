@@ -27,6 +27,7 @@
 
   outputs =
     {
+      self,
       nixpkgs,
       home-manager,
       qylock,
@@ -46,6 +47,7 @@
               system = "x86_64-linux";
 
               specialArgs = {
+                inherit self;
                 hostname = systemName;
                 keyboardLayout =
                   if systemName == "x1" then
