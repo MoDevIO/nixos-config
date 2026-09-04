@@ -61,6 +61,12 @@
         command opencode "$@"
         kitty @ set-spacing padding=default
       }
+
+      btop() {
+        kitty @ set-spacing padding=0
+        command btop "$@"
+        kitty @ set-spacing padding=default
+      }
     '';
 
   };
