@@ -1,4 +1,8 @@
-{ pkgs, hostname, username, ... }:
+{
+  pkgs,
+  maschineName,
+  ...
+}:
 
 {
   home.packages = [
@@ -77,17 +81,17 @@
 
           settings = {
             nixd = {
-              nixpkgs.expr = "import (builtins.getFlake \"git+file:///home/${username}/nixos-config\").inputs.nixpkgs { }";
+              nixpkgs.expr = "import (builtins.getFlake \"git+file:///home/mo/nixos-config\").inputs.nixpkgs { }";
 
               options = {
                 nixos.expr =
-                  "(builtins.getFlake \"git+file:///home/${username}/nixos-config\").nixosConfigurations."
-                  + hostname
+                  "(builtins.getFlake \"git+file:///home/mo/nixos-config\").nixosConfigurations."
+                  + maschineName
                   + ".options";
 
                 home_manager.expr =
-                  "(builtins.getFlake \"git+file:///home/${username}/nixos-config\").nixosConfigurations."
-                  + hostname
+                  "(builtins.getFlake \"git+file:///home/mo/nixos-config\").nixosConfigurations."
+                  + maschineName
                   + ".options.home-manager.users.type.getSubOptions []";
               };
             };
@@ -132,6 +136,24 @@
             "--stdio"
           ];
           filetypes = [ "python" ];
+        };
+      };
+      cpp = {
+        enable = true;
+        config = {
+          cmd = [
+            "clangd"
+            "--background-index"
+            "--clang-tidy"
+            "--completion-style=detailed"
+            "--header-insertion=never"
+          ];
+          filetypes = [
+            "c"
+            "cpp"
+            "objc"
+            "objcpp"
+          ];
         };
       };
     };
