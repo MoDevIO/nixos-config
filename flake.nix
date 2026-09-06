@@ -34,57 +34,90 @@
     }:
     let
       machines = builtins.fromJSON (builtins.readFile ./machines.json);
+      servers = builtins.fromJSON (builtins.readFile ./servers.json);
+
+      mkDesktop =
+        machine:
+        let
+          systemName = machine.name;
+
+          specialArgs = {
+            inherit self nixcord systemName;
+
+            hostname = machine.hostname;
+            maschineName = machine.name;
+            keyboardLayout = machine.keyboard;
+            username = machine.user;
+
+            ipAddr = machine.ip;
+            prefixLength = machine.prefixLength;
+            networkInterface = machine.networkInterface;
+          };
+
+          homemanagerSpecialArgs = specialArgs // {
+            firefox-addons = nur.legacyPackages.${machine.system}.repos.rycee.firefox-addons;
+          };
+        in
+        {
+          name = systemName;
+
+          value = nixpkgs.lib.nixosSystem {
+            system = machine.system;
+            inherit specialArgs;
+
+            modules = [
+              ./hosts/${systemName}
+
+              qylock.nixosModules.default
+              sops-nix.nixosModules.sops
+              nixvim.nixosModules.nixvim
+              home-manager.nixosModules.home-manager
+
+              {
+                home-manager.sharedModules = [
+                  sops-nix.homeModules.sops
+                  nixvim.homeModules.nixvim
+                ];
+
+                home-manager.extraSpecialArgs = homemanagerSpecialArgs;
+              }
+            ];
+          };
+        };
+
+      mkServer =
+        server:
+        let
+          systemName = server.name;
+
+          specialArgs = {
+            inherit self systemName;
+
+            hostname = server.hostname;
+            username = "admin";
+
+            ipAddr = server.ip;
+            prefixLength = server.prefixLength;
+            networkInterface = server.networkInterface;
+          };
+        in
+        {
+          name = systemName;
+
+          value = nixpkgs.lib.nixosSystem {
+            system = server.system;
+            inherit specialArgs;
+
+            modules = [
+              ./hosts/servers
+              ./hosts/servers/${systemName}
+
+              sops-nix.nixosModules.sops
+            ];
+          };
+        };
     in
     {
-      nixosConfigurations = builtins.listToAttrs (
-        map (
-          machine:
-          let
-            systemName = machine.name;
-
-            specialArgs = {
-              inherit self nixcord systemName;
-
-              hostname = machine.hostname;
-              keyboardLayout = machine.keyboard;
-              username = machine.user;
-
-              ipAddr = machine.ip;
-              prefixLength = machine.prefixLength;
-              networkInterface = machine.networkInterface;
-            };
-
-            homemanagerSpecialArgs = specialArgs // {
-              firefox-addons = nur.legacyPackages.${machine.system}.repos.rycee.firefox-addons;
-            };
-          in
-          {
-            name = systemName;
-
-            value = nixpkgs.lib.nixosSystem {
-              system = machine.system;
-              inherit specialArgs;
-
-              modules = [
-                ./hosts/${systemName}
-
-                qylock.nixosModules.default
-                sops-nix.nixosModules.sops
-                nixvim.nixosModules.nixvim
-                home-manager.nixosModules.home-manager
-
-                {
-                  home-manager.sharedModules = [
-                    sops-nix.homeModules.sops
-                    nixvim.homeModules.nixvim
-                  ];
-
-                  home-manager.extraSpecialArgs = homemanagerSpecialArgs;
-                }
-              ];
-            };
-          }
-        ) machines
-      );
+      nixosConfigurations = builtins.listToAttrs ((map mkDesktop machines) ++ (map mkServer servers));
     };
 }
