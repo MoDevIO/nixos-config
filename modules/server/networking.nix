@@ -1,7 +1,7 @@
 {
   hostname,
   networkInterface,
-  ip,
+  ipAddr,
   prefixLength,
   ...
 }:
@@ -15,7 +15,7 @@
 
     interfaces.${networkInterface}.ipv4.addresses = [
       {
-        address = ip;
+        address = ipAddr;
         prefixLength = prefixLength;
       }
     ];
