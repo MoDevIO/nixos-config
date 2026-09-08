@@ -1,6 +1,7 @@
 [
   {
     "name": "t14",
+    "disk": "nvme0n1",
     "system": "x86_64-linux",
     "hostname": "T14",
     "keyboard": "gb",
@@ -11,6 +12,7 @@
   },
   {
     "name": "x1",
+    "disk": "PLACEHOLDER",
     "system": "x86_64-linux",
     "hostname": "X1",
     "keyboard": "de",
@@ -21,6 +23,7 @@
   },
   {
     "name": "pc",
+    "disk": "nvme0n1",
     "system": "x86_64-linux",
     "hostname": "MoPC",
     "keyboard": "de",

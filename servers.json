@@ -1,6 +1,7 @@
 [
   {
     "name": "nixser1",
+    "disk": "nvme0n1",
     "system": "x86_64-linux",
     "hostname": "nixser1",
     "ip": "192.168.179.100",
