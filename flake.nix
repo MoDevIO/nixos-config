@@ -1,8 +1,10 @@
 {
   description = "NixOS Configuration";
-
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+
+    disko.url = "github:nix-community/disko";
+    disko.inputs.nixpkgs.follows = "nixpkgs";
 
     nur.url = "github:nix-community/NUR";
     nur.inputs.nixpkgs.follows = "nixpkgs";
@@ -19,12 +21,12 @@
     qylock.url = "github:Darkkal44/qylock";
     nixcord.url = "github:4evy/nixcord";
   };
-
   outputs =
     {
       self,
       nixpkgs,
       home-manager,
+      disko,
       qylock,
       nur,
       nixcord,
@@ -40,15 +42,13 @@
         machine:
         let
           systemName = machine.name;
-
           specialArgs = {
             inherit self nixcord systemName;
-
             hostname = machine.hostname;
+            disk = machine.disk;
             maschineName = machine.name;
             keyboardLayout = machine.keyboard;
             username = machine.user;
-
             ipAddr = machine.ip;
             prefixLength = machine.prefixLength;
             networkInterface = machine.networkInterface;
@@ -57,67 +57,93 @@
           homemanagerSpecialArgs = specialArgs // {
             firefox-addons = nur.legacyPackages.${machine.system}.repos.rycee.firefox-addons;
           };
+
+          commonModules = [
+            ./hosts/${systemName}
+            qylock.nixosModules.default
+            sops-nix.nixosModules.sops
+            nixvim.nixosModules.nixvim
+            home-manager.nixosModules.home-manager
+            {
+              home-manager.sharedModules = [
+                sops-nix.homeModules.sops
+                nixvim.homeModules.nixvim
+              ];
+              home-manager.extraSpecialArgs = homemanagerSpecialArgs;
+            }
+          ];
+
+          diskoModules = [
+            ./modules/disko-config.nix
+            disko.nixosModules.disko
+          ];
+
+          mkSystem =
+            extraModules:
+            nixpkgs.lib.nixosSystem {
+              system = machine.system;
+              inherit specialArgs;
+              modules = commonModules ++ extraModules;
+            };
         in
-        {
-          name = systemName;
-
-          value = nixpkgs.lib.nixosSystem {
-            system = machine.system;
-            inherit specialArgs;
-
-            modules = [
-              ./hosts/${systemName}
-
-              qylock.nixosModules.default
-              sops-nix.nixosModules.sops
-              nixvim.nixosModules.nixvim
-              home-manager.nixosModules.home-manager
-
-              {
-                home-manager.sharedModules = [
-                  sops-nix.homeModules.sops
-                  nixvim.homeModules.nixvim
-                ];
-
-                home-manager.extraSpecialArgs = homemanagerSpecialArgs;
-              }
-            ];
-          };
-        };
+        [
+          {
+            name = systemName;
+            value = mkSystem [ ];
+          }
+          {
+            name = "${systemName}-install";
+            value = mkSystem diskoModules;
+          }
+        ];
 
       mkServer =
         server:
         let
           systemName = server.name;
-
           specialArgs = {
             inherit self systemName;
-
             hostname = server.hostname;
+            disk = server.disk;
             username = "admin";
-
             ipAddr = server.ip;
             prefixLength = server.prefixLength;
             networkInterface = server.networkInterface;
           };
+
+          commonModules = [
+            ./hosts/servers
+            ./hosts/servers/${systemName}
+            sops-nix.nixosModules.sops
+          ];
+
+          diskoModules = [
+            ./modules/disko-config.nix
+            disko.nixosModules.disko
+          ];
+
+          mkSystem =
+            extraModules:
+            nixpkgs.lib.nixosSystem {
+              system = server.system;
+              inherit specialArgs;
+              modules = commonModules ++ extraModules;
+            };
         in
-        {
-          name = systemName;
-
-          value = nixpkgs.lib.nixosSystem {
-            system = server.system;
-            inherit specialArgs;
-
-            modules = [
-              ./hosts/servers
-              ./hosts/servers/${systemName}
-
-              sops-nix.nixosModules.sops
-            ];
-          };
-        };
+        [
+          {
+            name = systemName;
+            value = mkSystem [ ];
+          }
+          {
+            name = "${systemName}-install";
+            value = mkSystem diskoModules;
+          }
+        ];
     in
     {
-      nixosConfigurations = builtins.listToAttrs ((map mkDesktop machines) ++ (map mkServer servers));
+      nixosConfigurations = builtins.listToAttrs (
+        nixpkgs.lib.flatten ((map mkDesktop machines) ++ (map mkServer servers))
+      );
     };
 }
