@@ -2,11 +2,7 @@
   programs.kitty = {
     enable = true;
 
-    autoThemeFiles = {
-      dark = "everforest_dark_medium";
-      light = "everforest_light_medium";
-      noPreference = "everforest_dark_medium";
-    };
+    themeFile = "everforest_dark_medium";
 
     settings = {
       shell = "zsh";
