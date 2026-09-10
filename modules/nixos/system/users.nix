@@ -8,7 +8,9 @@
 
 {
 
-  sops.secrets."user_password_${username}" = { };
+  sops.secrets."user_password_${username}" = {
+    neededForUsers = true;
+  };
 
   users.users.${username} = {
     isNormalUser = true;
@@ -16,6 +18,8 @@
     extraGroups = [
       "networkmanager"
       "wheel"
+      "input"
+      "uinput"
     ];
     hashedPasswordFile = config.sops.secrets."user_password_${username}".path;
   };
