@@ -14,6 +14,12 @@
 
   networking = {
     hostName = hostname;
+
+    defaultGateway = {
+      address = "192.168.178.1";
+      interface = networkInterface;
+    };
+
     interfaces.${networkInterface}.ipv4.addresses = [
       {
         address = ipAddr;
