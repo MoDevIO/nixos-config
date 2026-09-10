@@ -1,7 +1,9 @@
 { config, ... }:
 
 {
-  sops.secrets."server_password" = { };
+  sops.secrets."server_password" = {
+    neededForUsers = true;
+  };
 
   users.users."admin" = {
     isNormalUser = true;
