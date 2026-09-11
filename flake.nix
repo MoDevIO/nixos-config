@@ -60,6 +60,7 @@
 
           commonModules = [
             ./hosts/${systemName}
+            ./overlays
             qylock.nixosModules.default
             sops-nix.nixosModules.sops
             nixvim.nixosModules.nixvim
@@ -114,6 +115,7 @@
           commonModules = [
             ./hosts/servers
             ./hosts/servers/${systemName}
+            ./overlays
             sops-nix.nixosModules.sops
           ];
 
