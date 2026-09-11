@@ -4,6 +4,7 @@
     ./blink-pairs.nix
     ./conform.nix
     ./lsp-signature.nix
+    ./vimtex.nix
     ./copilot.nix
     ./gitsigns.nix
     ./snacks.nix
