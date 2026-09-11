@@ -12,7 +12,7 @@
     ./terminal
     ./system/color-scheme.nix
     ./system/mouse-cursor.nix
-    ./syncthing/syncthing.nix
+    ./services
   ];
 
   home.stateVersion = "26.05";

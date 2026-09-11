@@ -15,6 +15,9 @@
     sops-nix.url = "github:Mic92/sops-nix";
     sops-nix.inputs.nixpkgs.follows = "nixpkgs";
 
+    edgepad.url = "github:assembledev/edgepad";
+    edgepad.inputs.nixpkgs.follows = "nixpkgs";
+
     nixvim.url = "github:nix-community/nixvim";
     nixvim.inputs.nixpkgs.follows = "nixpkgs";
 
@@ -33,7 +36,7 @@
       nixvim,
       sops-nix,
       ...
-    }:
+    }@inputs:
     let
       machines = builtins.fromJSON (builtins.readFile ./machines.json);
       servers = builtins.fromJSON (builtins.readFile ./servers.json);
@@ -43,7 +46,12 @@
         let
           systemName = machine.name;
           specialArgs = {
-            inherit self nixcord systemName;
+            inherit
+              self
+              inputs
+              nixcord
+              systemName
+              ;
             hostname = machine.hostname;
             disk = machine.disk;
             maschineName = machine.name;
