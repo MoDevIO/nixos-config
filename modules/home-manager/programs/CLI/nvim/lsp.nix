@@ -14,6 +14,9 @@
     pkgs.pyright
     pkgs.nixd
     pkgs.kdePackages.qtdeclarative
+    pkgs.texlab
+    pkgs.typst
+    pkgs.tinymist
 
     # Formatters
     pkgs.prettier
@@ -112,6 +115,26 @@
               };
             };
           };
+        };
+      };
+
+      texlab = {
+        enable = true;
+        config = {
+          cmd = [
+            "texlab"
+          ];
+          filetypes = [ "tex" ];
+        };
+      };
+
+      tinymist = {
+        enable = true;
+        config = {
+          cmd = [
+            "tinymist"
+          ];
+          filetypes = [ "typst" ];
         };
       };
 
