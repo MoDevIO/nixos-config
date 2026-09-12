@@ -6,7 +6,7 @@
   services.edgepad = {
     enable = true;
     device = "auto";
-    edgeWidth = 0.10;
+    edgeWidth = 0.09;
 
     tapMinDurationMs = 40;
     tapMaxDurationMs = 180;
