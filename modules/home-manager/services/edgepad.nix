@@ -3,6 +3,12 @@
 {
   imports = [ inputs.edgepad.homeManagerModules.default ];
 
+  home.packages = with pkgs; [
+    brightnessctl
+    pulseaudio
+    playerctl
+  ];
+
   services.edgepad = {
     enable = true;
     device = "auto";
@@ -41,6 +47,43 @@
           "set-sink-volume"
           "@DEFAULT_SINK@"
           "-3%"
+        ];
+      }
+    ];
+
+    gestures = [
+      {
+        zone = "bottom";
+        direction = "tap";
+        action = [
+          "${pkgs.playerctl}/bin/playerctl"
+          "play-pause"
+        ];
+      }
+      {
+        zone = "bottom";
+        direction = "left";
+        action = [
+          "${pkgs.playerctl}/bin/playerctl"
+          "previous"
+        ];
+      }
+      {
+        zone = "bottom";
+        direction = "right";
+        action = [
+          "${pkgs.playerctl}/bin/playerctl"
+          "next"
+        ];
+      }
+
+      {
+        zone = "top";
+        direction = "tap";
+        action = [
+          "zsh"
+          "-ic"
+          "ha-toggle"
         ];
       }
     ];

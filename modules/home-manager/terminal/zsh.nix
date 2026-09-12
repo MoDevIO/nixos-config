@@ -1,6 +1,13 @@
-{ systemName, ... }:
+{
+  config,
+  pkgs,
+  systemName,
+  ...
+}:
 
 {
+  sops.secrets.ha_token = { };
+
   programs.zsh = {
     enable = true;
     autosuggestion.enable = true;
@@ -66,6 +73,17 @@
         kitty @ set-spacing padding=0
         command btop "$@"
         kitty @ set-spacing padding=default
+      }
+
+      ha-toggle() {
+        local entity=''${1:-light.mo}
+        local token=$(cat ${config.sops.secrets.ha_token.path})
+
+        ${pkgs.curl}/bin/curl -s -X POST \
+          -H "Authorization: Bearer $token" \
+          -H "Content-Type: application/json" \
+          -d "{\"entity_id\": \"light.mo\"}" \
+          http://homeassistant:8123/api/services/light/toggle
       }
     '';
 
