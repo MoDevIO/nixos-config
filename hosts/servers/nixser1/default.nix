@@ -7,5 +7,6 @@
     "${self}/containers/immich"
     "${self}/containers/navidrome"
     "${self}/containers/jellyfin"
+    "${self}/containers/pihole"
   ];
 }
