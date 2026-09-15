@@ -8,5 +8,6 @@
     "${self}/containers/navidrome"
     "${self}/containers/jellyfin"
     "${self}/containers/pihole"
+    "${self}/containers/homeassistant"
   ];
 }
