@@ -86,6 +86,24 @@
           "ha-toggle"
         ];
       }
+      {
+        zone = "top";
+        direction = "left";
+        action = [
+          "hyprctl"
+          "dispatch"
+          "hl.dsp.focus({ workspace = 'e+1' })"
+        ];
+      }
+      {
+        zone = "top";
+        direction = "right";
+        action = [
+          "hyprctl"
+          "dispatch"
+          "hl.dsp.focus({ workspace = 'e-1' })"
+        ];
+      }
     ];
   };
 }
