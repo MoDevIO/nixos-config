@@ -39,6 +39,7 @@
       ];
       _module.args = {
         inherit prefixLength ipAddr;
+        containerIpAddr = "192.168.179.101";
       };
 
       networking.hostName = "synapse";
