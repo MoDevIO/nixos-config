@@ -17,6 +17,7 @@
     pkgs.texlab
     pkgs.typst
     pkgs.tinymist
+    pkgs.terraform-ls
 
     # Formatters
     pkgs.prettier
@@ -161,6 +162,18 @@
           filetypes = [ "python" ];
         };
       };
+
+      terraformls = {
+        enable = true;
+        config = {
+          cmd = [
+            "terraform-ls"
+            "serve"
+          ];
+          filetypes = [ "terraform" ];
+        };
+      };
+
       cpp = {
         enable = true;
         config = {
