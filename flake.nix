@@ -23,6 +23,9 @@
 
     qylock.url = "github:Darkkal44/qylock";
     nixcord.url = "github:4evy/nixcord";
+
+    authentik-nix.url = "github:nix-community/authentik-nix";
+    authentik-nix.inputs.nixpkgs.follows = "nixpkgs";
   };
   outputs =
     {
@@ -35,6 +38,7 @@
       nixcord,
       nixvim,
       sops-nix,
+      authentik-nix,
       ...
     }@inputs:
     let
@@ -111,7 +115,7 @@
         let
           systemName = server.name;
           specialArgs = {
-            inherit self systemName;
+            inherit self inputs systemName;
             hostname = server.hostname;
             disk = server.disk;
             username = "admin";
