@@ -3,6 +3,7 @@
 {
   imports = [
     ./hardware-configuration.nix
+    "${self}/containers/authentik"
     "${self}/containers/synapse"
     "${self}/containers/immich"
     "${self}/containers/navidrome"
