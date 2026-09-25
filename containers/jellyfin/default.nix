@@ -29,6 +29,11 @@
         hostPath = "/mnt/media";
         isReadOnly = true;
       };
+
+      "/media-2" = {
+        hostPath = "/media-2";
+        isReadOnly = true;
+      };
     };
 
     config = {
