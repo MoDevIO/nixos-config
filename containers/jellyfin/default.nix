@@ -34,6 +34,11 @@
         hostPath = "/media-2";
         isReadOnly = true;
       };
+
+      "/media-3" = {
+        hostPath = "/media-3";
+        isReadOnly = true;
+      };
     };
 
     config = {
