@@ -27,10 +27,6 @@
         hostPath = "/run/secrets";
         isReadOnly = true;
       };
-      "/run/secrets-rendered" = {
-        hostPath = "/run/secrets-rendered";
-        isReadOnly = true;
-      };
     };
 
     config = {
@@ -53,7 +49,7 @@
 
       services.navidrome = {
         enable = true;
-        environmentFile = "/run/secrets-rendered/navidrome-lastfm.env";
+        environmentFile = "/run/secrets/rendered/navidrome-lastfm.env";
         settings = {
           Port = 4533;
           Address = "0.0.0.0";
