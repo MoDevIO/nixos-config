@@ -1,5 +1,6 @@
 {
   self,
+  config,
   prefixLength,
   ipAddr,
   ...
@@ -7,6 +8,13 @@
 
 {
   sops.secrets."tailscale_auth_key" = { };
+  sops.secrets."navidrome_lastfm_api_key" = { };
+  sops.secrets."navidrome_lastfm_secret" = { };
+
+  sops.templates."navidrome-lastfm.env".content = ''
+    ND_LASTFM_APIKEY=${config.sops.placeholder."navidrome_lastfm_api_key"}
+    ND_LASTFM_SECRET=${config.sops.placeholder."navidrome_lastfm_secret"}
+  '';
 
   containers.navidrome = {
     autoStart = true;
@@ -17,6 +25,10 @@
     bindMounts = {
       "/run/secrets" = {
         hostPath = "/run/secrets";
+        isReadOnly = true;
+      };
+      "/run/secrets-rendered" = {
+        hostPath = "/run/secrets-rendered";
         isReadOnly = true;
       };
     };
@@ -41,12 +53,15 @@
 
       services.navidrome = {
         enable = true;
+        environmentFile = "/run/secrets-rendered/navidrome-lastfm.env";
         settings = {
           Port = 4533;
           Address = "0.0.0.0";
 
           MusicFolder = "/var/lib/navidrome/music";
           DataFolder = "/var/lib/navidrome/data";
+
+          LastFM.Enabled = true;
         };
       };
     };
