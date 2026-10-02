@@ -8,6 +8,7 @@
     ./vimtex.nix
     ./copilot.nix
     ./gitsigns.nix
+    ./openscad.nix
     ./snacks.nix
     ./leetcode.nix
     ./highlight-colors.nix
