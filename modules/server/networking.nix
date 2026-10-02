@@ -10,6 +10,8 @@
   services.openssh.enable = true;
   users.users.root.openssh.authorizedKeys.keys = [
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDQGs63zr5X6vgRhUD6+gOWXYaBsvHDddH/RwnccbkEp momo.tiltis@gmail.com"
+    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMGpqMjrLpHVfXu8qngOcgpAm/ibu5IIhUmaX+GwqlT6 to@TT14"
+    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIdo4OEtxrTelimwbk/CPtQpCYxqYKL4WPVXdd+ox6tA momo.tiltis@gmail.com"
   ];
 
   networking = {
