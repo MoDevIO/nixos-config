@@ -51,6 +51,21 @@
               psk = "$SUPERSPEED_PASSWORD";
             };
           };
+          "WLAN-BRFS25" = {
+            connection = {
+              id = "WLAN-BRFS25";
+              type = "wifi";
+              autoconnect = true;
+            };
+            wifi = {
+              ssid = "WLAN-BRFS25";
+              mode = "infrastructure";
+            };
+            wifi-security = {
+              key-mgmt = "wpa-psk";
+              psk = "$JOWLAN_PASSWORD";
+            };
+          };
         };
       };
     };
