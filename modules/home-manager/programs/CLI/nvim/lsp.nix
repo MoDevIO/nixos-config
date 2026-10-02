@@ -24,6 +24,9 @@
     pkgs.nixfmt
     pkgs.luaformatter
     pkgs.black
+
+    # Other
+    pkgs.openscad
   ];
 
   programs.nixvim = {
@@ -174,6 +177,17 @@
         };
       };
 
+      openscad_lsp = {
+        enable = true;
+        config = {
+          cmd = [
+            "openscad-lsp"
+            "--stdio"
+          ];
+          filetypes = [ "openscad" ];
+        };
+      };
+
       cpp = {
         enable = true;
         config = {
@@ -193,6 +207,7 @@
         };
       };
     };
+
     diagnostic.settings = {
       signs.text = {
         ERROR = "";
@@ -201,5 +216,12 @@
         HINT = "";
       };
     };
+    extraConfigLua = ''
+      vim.filetype.add({
+        extension = {
+          scad = "openscad",
+        },
+      })
+    '';
   };
 }
