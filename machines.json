@@ -22,7 +22,7 @@
     "networkInterface": "wlp1s0"
   },
   {
-    "name": "pc",
+    "name": "mopc",
     "disk": "nvme0n1",
     "system": "x86_64-linux",
     "hostname": "MoPC",
