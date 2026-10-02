@@ -42,6 +42,11 @@
       services.home-assistant = {
         enable = true;
         configDir = "/var/lib/home-assistant/config";
+        extraComponents = [
+          "default_config"
+          "esphome"
+          "shelly"
+        ];
       };
     };
   };
