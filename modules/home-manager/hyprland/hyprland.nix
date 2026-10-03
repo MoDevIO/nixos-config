@@ -1,4 +1,9 @@
-{ pkgs, keyboardLayout, ... }:
+{
+  pkgs,
+  keyboardLayout,
+  hostname,
+  ...
+}:
 
 {
   imports = [
@@ -7,18 +12,7 @@
 
   wayland.windowManager.hyprland = {
     enable = true;
-
     configType = "lua";
-
-    settings = {
-      monitor = {
-        output = "eDP-1";
-        mode = "1920x1200@60";
-        position = "0x0";
-        scale = 1.2;
-      };
-    };
-
     settings.config.input.kb_layout = keyboardLayout;
 
     extraConfig = ''
@@ -31,6 +25,16 @@
       require("autostart")
       require("input")
       require("gkeys")
+
+      ${
+        if hostname == "T14" then
+          ''require("monitors.t14")''
+        else if hostname == "mopc" then
+          ''require("monitors.mopc")''
+        else
+          ""
+      }
+
     '';
   };
 
@@ -51,6 +55,8 @@
   xdg.configFile."hypr/autostart.lua".source = ./lua/autostart.lua;
   xdg.configFile."hypr/input.lua".source = ./lua/input.lua;
   xdg.configFile."hypr/gkeys.lua".source = ./lua/gkeys.lua;
+  xdg.configFile."hypr/monitors/t14.lua".source = ./lua/monitors/t14.lua;
+  xdg.configFile."hypr/monitors/mopc.lua".source = ./lua/monitors/mopc.lua;
 
   programs.quickshell = {
     enable = true;
