@@ -1,6 +1,8 @@
+{ hostname, ... }:
+
 {
   imports = [
-    ./edgepad.nix
     ./syncthing.nix
-  ];
+  ]
+  ++ (if hostname == "T14" then [ ./edgepad.nix ] else [ ]);
 }
