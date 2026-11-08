@@ -10,7 +10,6 @@
     "${self}/containers/feishin"
     "${self}/containers/jellyfin"
     "${self}/containers/pihole"
-    # "${self}/containers/homeassistant"
     "${self}/containers/ollama"
     # "${self}/containers/ttyd"
     "${self}/containers/tom"
