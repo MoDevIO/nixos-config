@@ -67,7 +67,7 @@
         };
         listenPort = 8082;
 
-        allowedHosts = "homepage:8082,home.tilt.mn";
+        allowedHosts = "homepage:8082,status.tilt.mn";
 
         services = [
           {
