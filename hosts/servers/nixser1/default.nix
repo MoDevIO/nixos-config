@@ -14,6 +14,7 @@
     # "${self}/containers/ttyd"
     "${self}/containers/tom"
     "${self}/containers/homepage"
+    "${self}/containers/paperless-ngx"
 
     "${self}/modules/server/networking.nix"
   ];
