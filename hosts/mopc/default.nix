@@ -1,4 +1,4 @@
-{ self, ... }:
+{ self, config, ... }:
 
 {
   imports = [
@@ -10,4 +10,12 @@
     "${self}/modules/nixos/programs"
     "${self}/modules/nixos/programs/games.nix"
   ];
+
+  hardware.graphics.enable = true;
+  services.xserver.videoDrivers = [ "nvidia" ];
+  hardware.nvidia = {
+    open = false;
+    modesetting.enable = true;
+    package = config.boot.kernelPackages.nvidiaPackages.stable;
+  };
 }
