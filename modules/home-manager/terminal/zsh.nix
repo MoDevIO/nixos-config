@@ -57,23 +57,23 @@
       }
 
       # Kitty padding=0 for specific commands
-      nvim() {
-        kitty @ set-spacing padding=0
-        command nvim "$@"
-        kitty @ set-spacing padding=default
-      }
-
-      opencode() {
-        kitty @ set-spacing padding=0
-        command opencode "$@"
-        kitty @ set-spacing padding=default
-      }
-
-      btop() {
-        kitty @ set-spacing padding=0
-        command btop "$@"
-        kitty @ set-spacing padding=default
-      }
+      # nvim() {
+      #   kitty @ set-spacing padding=0
+      #   command nvim "$@"
+      #   kitty @ set-spacing padding=default
+      # }
+      #
+      # opencode() {
+      #   kitty @ set-spacing padding=0
+      #   command opencode "$@"
+      #   kitty @ set-spacing padding=default
+      # }
+      #
+      # btop() {
+      #   kitty @ set-spacing padding=0
+      #   command btop "$@"
+      #   kitty @ set-spacing padding=default
+      # }
 
       ha-toggle() {
         local entity=''${1:-light.mo}
