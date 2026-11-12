@@ -11,6 +11,7 @@
       scrollbar_track_opacity = 0;
       scrollbar_track_hover_opacity = 0;
       allow_remote_control = true;
+      listen_on = "unix:/tmp/kitty";
 
       font_family = "JetBrainsMono Nerd Font";
       font_size = 13.5;
@@ -21,7 +22,7 @@
       url_style = "underline";
 
       remember_window_size = false;
-      window_padding_width = 25;
+      window_padding_width = 22;
 
       cursor_trail = 1;
     };
