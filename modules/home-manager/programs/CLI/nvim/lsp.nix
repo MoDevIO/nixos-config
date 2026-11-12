@@ -18,6 +18,7 @@
     pkgs.typst
     pkgs.tinymist
     pkgs.terraform-ls
+    pkgs.tailwindcss-language-server
 
     # Formatters
     pkgs.prettier
@@ -71,6 +72,35 @@
             "typescript"
             "javascriptreact"
             "typescriptreact"
+          ];
+        };
+      };
+
+      tailwindcss = {
+        enable = true;
+        config = {
+          cmd = [
+            "tailwindcss-language-server"
+            "--stdio"
+          ];
+          filetypes = [
+            "html"
+            "css"
+            "scss"
+            "javascript"
+            "typescript"
+            "javascriptreact"
+            "typescriptreact"
+          ];
+          root_markers = [
+            "tailwind.config.js"
+            "tailwind.config.cjs"
+            "tailwind.config.mjs"
+            "tailwind.config.ts"
+            "postcss.config.js"
+            "postcss.config.mjs"
+            "package.json"
+            ".git"
           ];
         };
       };
