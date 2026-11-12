@@ -1,3 +1,5 @@
+{ pkgs, ... }:
+
 {
   imports = [
     ./firefox.nix
@@ -11,5 +13,9 @@
     ./opentofu.nix
     ./appimage.nix
     ./devtools.nix
+  ];
+
+  environment.systemPackages = with pkgs; [
+    sops
   ];
 }
