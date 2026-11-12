@@ -409,6 +409,22 @@
     },
     "nixpkgs_3": {
       "locked": {
+        "lastModified": 1792094642,
+        "narHash": "sha256-zp8ToDMnqZcu4o4IH9pdwXFXGp7yLm/M0dEnNWnyd7I=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "fe13242281a67641c0102cdb1087f0ebe586c7df",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixos-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs_4": {
+      "locked": {
         "lastModified": 1780243769,
         "narHash": "sha256-x5UQuRsH3MqI0U9afaXSNqzTPSeZlRLvFAav2Ux1pNw=",
         "owner": "NixOS",
@@ -466,6 +482,24 @@
         "type": "github"
       }
     },
+    "owly": {
+      "inputs": {
+        "nixpkgs": "nixpkgs_3"
+      },
+      "locked": {
+        "lastModified": 1794422944,
+        "narHash": "sha256-LtNUgXddvMXQTlRKUhbD4iyhNfeZ06LOt6TSdkdkk5k=",
+        "owner": "t4t5",
+        "repo": "owly",
+        "rev": "21171d8f9a08bfa2c625a1fa338e877a67913e54",
+        "type": "github"
+      },
+      "original": {
+        "owner": "t4t5",
+        "repo": "owly",
+        "type": "github"
+      }
+    },
     "pyproject-build-systems": {
       "inputs": {
         "nixpkgs": [
@@ -520,7 +554,7 @@
       "inputs": {
         "flake-compat": "flake-compat_2",
         "flake-utils": "flake-utils_2",
-        "nixpkgs": "nixpkgs_3"
+        "nixpkgs": "nixpkgs_4"
       },
       "locked": {
         "lastModified": 1789360700,
@@ -547,6 +581,7 @@
         "nixpkgs-stable": "nixpkgs-stable",
         "nixvim": "nixvim",
         "nur": "nur",
+        "owly": "owly",
         "qylock": "qylock",
         "sops-nix": "sops-nix"
       }

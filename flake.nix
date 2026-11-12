@@ -27,6 +27,8 @@
 
     authentik-nix.url = "github:nix-community/authentik-nix";
     authentik-nix.inputs.nixpkgs.follows = "nixpkgs";
+
+    owly.url = "github:t4t5/owly";
   };
   outputs =
     {

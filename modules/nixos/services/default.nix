@@ -7,5 +7,6 @@
     ./edgepad.nix
     ./kdeconnect.nix
     ./printing.nix
+    ./owly.nix
   ];
 }
