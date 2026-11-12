@@ -1,6 +1,8 @@
+{ hostname, ... }:
+
 {
   services.howdy = {
-    enable = true;
+    enable = hostname == "t14" || hostname == "t14-install";
 
     control = "sufficient";
 
