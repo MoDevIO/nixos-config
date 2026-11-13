@@ -7,5 +7,8 @@
     python3
     typescript
     tsx
+
+    rustc
+    cargo
   ];
 }
