@@ -3,6 +3,7 @@
 {
   imports = [
     ./firefox.nix
+    ./mpv.nix
     ./git.nix
     ./terminal.nix
     ./nautilus.nix
