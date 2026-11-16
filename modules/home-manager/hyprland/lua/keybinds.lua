@@ -12,7 +12,7 @@ hl.bind("SUPER + G", hl.dsp.exec_cmd(editor))
 
 hl.bind("SUPER + C", hl.dsp.window.close())
 hl.bind("SUPER + M", hl.dsp.exit())
-hl.bind("SUPER + F", hl.dsp.window.fullscreen("maximized", "toggle"))
+hl.bind("SUPER + F", hl.dsp.window.fullscreen("maximized"))
 hl.bind("SUPER + V", hl.dsp.window.float({action = "toggle"}))
 
 hl.bind("SUPER + H", hl.dsp.focus({direction = "left"}))
