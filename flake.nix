@@ -32,6 +32,9 @@
 
     nowplayingd.url = "github:MoDevIO/nowplayingd";
     nowplayingd.inputs.nixpkgs.follows = "nixpkgs";
+
+    moqs.url = "github:MoDevIO/moqs";
+    moqs.inputs.nixpkgs.follows = "nixpkgs";
   };
   outputs =
     {
@@ -46,6 +49,7 @@
       sops-nix,
       authentik-nix,
       nowplayingd,
+      moqs,
       ...
     }@inputs:
     let
@@ -89,6 +93,7 @@
               home-manager.sharedModules = [
                 sops-nix.homeModules.sops
                 nixvim.homeModules.nixvim
+                moqs.homeManagerModules.default
               ];
               home-manager.extraSpecialArgs = homemanagerSpecialArgs;
             }

@@ -1,4 +1,5 @@
 {
+  config,
   pkgs,
   keyboardLayout,
   hostname,
@@ -6,6 +7,9 @@
 }:
 
 {
+  sops.secrets."navidrome/password" = { };
+  sops.secrets."gomuks" = { };
+
   imports = [
     ./background.nix
   ];
@@ -49,25 +53,24 @@
     wl-clipboard
   ];
 
-  xdg.configFile."hypr/workspaces.lua".source = ./lua/workspaces.lua;
-  xdg.configFile."hypr/keybinds.lua".source = ./lua/keybinds.lua;
-  xdg.configFile."hypr/appearance.lua".source = ./lua/appearance.lua;
-  xdg.configFile."hypr/autostart.lua".source = ./lua/autostart.lua;
-  xdg.configFile."hypr/input.lua".source = ./lua/input.lua;
-  xdg.configFile."hypr/gkeys.lua".source = ./lua/gkeys.lua;
-  xdg.configFile."hypr/monitors/t14.lua".source = ./lua/monitors/t14.lua;
-  xdg.configFile."hypr/monitors/mopc.lua".source = ./lua/monitors/mopc.lua;
+  xdg.configFile."hypr" = {
+    source = ./lua;
+    recursive = true;
+  };
 
-  programs.quickshell = {
+  services.moqs = {
     enable = true;
 
-    systemd.enable = true;
-    systemd.target = "hyprland-session.target";
+    navidrome = {
+      enable = true;
+      url = "music.tilt.mn";
+      username = "mo";
+      passwordFile = config.sops.secrets."navidrome/password".path;
+    };
+    matrix = {
+      enable = true;
+      username = "gomuks";
+      passwordCommand = "cat ${config.sops.secrets."gomuks".path}";
+    };
   };
-  # xdg.configFile."quickshell" = {
-  #   source = ./quickshell;
-  #   recursive = true;
-  # };
-
-  services.swaync.enable = true;
 }
