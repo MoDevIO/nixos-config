@@ -32,6 +32,12 @@
       enable = true;
 
       unmanaged = [ "mac:58:d8:12:64:8a:e8" ];
+
+      insertNameservers = [
+        "1.1.1.1"
+        "8.8.8.8"
+      ];
+
       ensureProfiles = {
         environmentFiles = [
           config.sops.secrets."wifi_secrets".path
