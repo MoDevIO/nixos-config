@@ -29,6 +29,9 @@
     authentik-nix.inputs.nixpkgs.follows = "nixpkgs";
 
     owly.url = "github:t4t5/owly";
+
+    nowplayingd.url = "github:MoDevIO/nowplayingd";
+    nowplayingd.inputs.nixpkgs.follows = "nixpkgs";
   };
   outputs =
     {
@@ -42,6 +45,7 @@
       nixvim,
       sops-nix,
       authentik-nix,
+      nowplayingd,
       ...
     }@inputs:
     let
@@ -79,6 +83,7 @@
             qylock.nixosModules.default
             sops-nix.nixosModules.sops
             nixvim.nixosModules.nixvim
+            nowplayingd.nixosModules.default
             home-manager.nixosModules.home-manager
             {
               home-manager.sharedModules = [

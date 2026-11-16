@@ -8,5 +8,6 @@
     ./kdeconnect.nix
     ./printing.nix
     ./owly.nix
+    ./nowplayingd.nix
   ];
 }

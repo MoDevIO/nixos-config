@@ -461,6 +461,26 @@
         "type": "github"
       }
     },
+    "nowplayingd": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1794691134,
+        "narHash": "sha256-R+bip60p3f6RptrJq2BME0aU/dJl4hk3Tqxl2uqTpEM=",
+        "owner": "MoDevIO",
+        "repo": "nowplayingd",
+        "rev": "6aac7f737aff6fe53f088a1e3a5ec2d7f73fdd7e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "MoDevIO",
+        "repo": "nowplayingd",
+        "type": "github"
+      }
+    },
     "nur": {
       "inputs": {
         "flake-parts": "flake-parts_3",
@@ -580,6 +600,7 @@
         "nixpkgs": "nixpkgs_2",
         "nixpkgs-stable": "nixpkgs-stable",
         "nixvim": "nixvim",
+        "nowplayingd": "nowplayingd",
         "nur": "nur",
         "owly": "owly",
         "qylock": "qylock",
