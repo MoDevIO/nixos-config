@@ -1,5 +1,6 @@
 {
   imports = [
+    ./power-profiles-daemon.nix
     ./openssh.nix
     ./howdy.nix
     ./pipewire.nix
