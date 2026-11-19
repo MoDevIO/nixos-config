@@ -8,7 +8,7 @@
   services.owly.settings = {
     allow_untested = true;
     station = "wlp51s0f4u1";
-    channels = [ 6 ];
+    country = "DE";
   };
 
   systemd.user.services.owly-radio = {
