@@ -89,11 +89,11 @@
             nixvim.nixosModules.nixvim
             nowplayingd.nixosModules.default
             home-manager.nixosModules.home-manager
+            moqs.nixosModules.default
             {
               home-manager.sharedModules = [
                 sops-nix.homeModules.sops
                 nixvim.homeModules.nixvim
-                moqs.homeManagerModules.default
               ];
               home-manager.extraSpecialArgs = homemanagerSpecialArgs;
             }

@@ -5,6 +5,9 @@ local editor = "nvim"
 
 local resize_increment = 20
 
+hl.bind("SUPER + R", hl.dsp.exec_cmd("qs ipc call launcher toggle"))
+hl.bind("SUPER + O", hl.dsp.exec_cmd("qs ipc call session lock"))
+
 hl.bind("SUPER + Q", hl.dsp.exec_cmd(terminal))
 hl.bind("SUPER + B", hl.dsp.exec_cmd(browser))
 hl.bind("SUPER + E", hl.dsp.exec_cmd(file_manager))
