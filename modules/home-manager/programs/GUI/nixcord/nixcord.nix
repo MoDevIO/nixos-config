@@ -3,9 +3,9 @@
 {
   programs.nixcord = {
     enable = true;
-    discord.enable = true;
-    discord.vencord.enable = true;
-    # vesktop.enable = true;
+    discord.enable = false;
+    # discord.vencord.enable = true;
+    vesktop.enable = true;
 
     user = username;
 
