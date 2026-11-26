@@ -31,4 +31,12 @@
       "8.8.8.8"
     ];
   };
+
+  time.timeZone = "Europe/Berlin";
+
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
+  system.stateVersion = "26.11";
 }

@@ -37,4 +37,6 @@
     "1.1.1.1"
     "8.8.8.8"
   ];
+
+  time.timeZone = "Europe/Berlin";
 }
