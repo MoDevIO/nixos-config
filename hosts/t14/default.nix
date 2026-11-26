@@ -14,4 +14,6 @@
 
   hardware.graphics.enable = true;
   services.xserver.videoDrivers = [ "amdgpu" ];
+
+  networking.wireless.interfaces = [ "wlp1s0" ];
 }
